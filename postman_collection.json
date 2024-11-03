@@ -1,0 +1,1221 @@
+{
+    "info": {
+        "_postman_id": "ef7a108c-a4ad-4f73-b08b-9fdcd5f38254",
+        "name": "112 Calls",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+        "_exporter_id": "30684135"
+    },
+    "item": [
+        {
+            "name": "Auth",
+            "item": [
+                {
+                    "name": "Login",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "// Parse the response JSON",
+                                    "var responseJson = pm.response.json();",
+                                    "",
+                                    "// Extract the token",
+                                    "var token = responseJson.data.token;",
+                                    "",
+                                    "// Set the token as an environment variable",
+                                    "pm.collectionVariables.set(\"TOKEN\", token);",
+                                    ""
+                                ],
+                                "type": "text/javascript",
+                                "packages": {}
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"username\": \"tikasoliha\",\n    \"password\": \"tikasoliha@201\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{API_URL}}/api/v1/auth/login",
+                            "host": ["{{API_URL}}"],
+                            "path": ["api", "v1", "auth", "login"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Logout",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{TOKEN}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [],
+                        "url": {
+                            "raw": "{{API_URL}}/api/v1/auth/logout",
+                            "host": ["{{API_URL}}"],
+                            "path": ["api", "v1", "auth", "logout"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Refresh",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{TOKEN}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [],
+                        "url": {
+                            "raw": "{{API_URL}}/api/v1/auth/refresh-token",
+                            "host": ["{{API_URL}}"],
+                            "path": ["api", "v1", "auth", "refresh-token"]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Master",
+            "item": [
+                {
+                    "name": "Employees",
+                    "item": [
+                        {
+                            "name": "List",
+                            "request": {
+                                "auth": {
+                                    "type": "bearer",
+                                    "bearer": [
+                                        {
+                                            "key": "token",
+                                            "value": "{{TOKEN}}",
+                                            "type": "string"
+                                        }
+                                    ]
+                                },
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{API_URL}}/api/v1/employees",
+                                    "host": ["{{API_URL}}"],
+                                    "path": ["api", "v1", "employees"]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Find",
+                            "request": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{API_URL}}/api/v1/employees",
+                                    "host": ["{{API_URL}}"],
+                                    "path": ["api", "v1", "employees"]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Create",
+                            "request": {
+                                "method": "POST",
+                                "header": [],
+                                "body": {
+                                    "mode": "formdata",
+                                    "formdata": [
+                                        {
+                                            "key": "religion_id",
+                                            "value": "1",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "marital_status_id",
+                                            "value": "1",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "name",
+                                            "value": " Tika Soliha",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "jasnita_number",
+                                            "value": " 10191",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "gender",
+                                            "value": " Male",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "dob",
+                                            "value": " 2001-04-01",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "address",
+                                            "value": " Indramayu",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "avatar",
+                                            "type": "file",
+                                            "src": "/run/user/1000/doc/74525f5/file.png"
+                                        }
+                                    ]
+                                },
+                                "url": {
+                                    "raw": "{{API_URL}}/api/v1/employees",
+                                    "host": ["{{API_URL}}"],
+                                    "path": ["api", "v1", "employees"]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Update",
+                            "request": {
+                                "method": "POST",
+                                "header": [],
+                                "body": {
+                                    "mode": "formdata",
+                                    "formdata": [
+                                        {
+                                            "key": "religion_id",
+                                            "value": "1",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "marital_status_id",
+                                            "value": "1",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "name",
+                                            "value": " Lubna",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "jasnita_number",
+                                            "value": " 10191",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "gender",
+                                            "value": " Male",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "dob",
+                                            "value": " 2001-04-01",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "address",
+                                            "value": " Indramayu",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "avatar",
+                                            "type": "file",
+                                            "src": "/run/user/1000/doc/74525f5/file.png"
+                                        }
+                                    ]
+                                },
+                                "url": {
+                                    "raw": "{{API_URL}}/api/v1/employees/1",
+                                    "host": ["{{API_URL}}"],
+                                    "path": ["api", "v1", "employees", "1"]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Delete",
+                            "request": {
+                                "method": "DELETE",
+                                "header": [],
+                                "body": {
+                                    "mode": "formdata",
+                                    "formdata": [
+                                        {
+                                            "key": "religion_id",
+                                            "value": "1",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "marital_status_id",
+                                            "value": "1",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "name",
+                                            "value": " Tika Soliha",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "jasnita_number",
+                                            "value": " 10191",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "gender",
+                                            "value": " Male",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "dob",
+                                            "value": " 2001-04-01",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "address",
+                                            "value": " Indramayu",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "avatar",
+                                            "type": "file",
+                                            "src": "/run/user/1000/doc/74525f5/file.png"
+                                        }
+                                    ]
+                                },
+                                "url": {
+                                    "raw": "{{API_URL}}/api/v1/employees/4",
+                                    "host": ["{{API_URL}}"],
+                                    "path": ["api", "v1", "employees", "4"]
+                                }
+                            },
+                            "response": []
+                        }
+                    ]
+                },
+                {
+                    "name": "Marital Status",
+                    "item": [
+                        {
+                            "name": "List",
+                            "request": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{API_URL}}/api/v1/marital-status",
+                                    "host": ["{{API_URL}}"],
+                                    "path": ["api", "v1", "marital-status"]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Create",
+                            "request": {
+                                "method": "POST",
+                                "header": [],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"name\": \"Divorce\"\n}",
+                                    "options": {
+                                        "raw": {
+                                            "language": "json"
+                                        }
+                                    }
+                                },
+                                "url": {
+                                    "raw": "{{API_URL}}/api/v1/marital-status",
+                                    "host": ["{{API_URL}}"],
+                                    "path": ["api", "v1", "marital-status"]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Update",
+                            "request": {
+                                "method": "PUT",
+                                "header": [],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"name\": \"Menikah Update\"\n}",
+                                    "options": {
+                                        "raw": {
+                                            "language": "json"
+                                        }
+                                    }
+                                },
+                                "url": {
+                                    "raw": "{{API_URL}}/api/v1/marital-status/1",
+                                    "host": ["{{API_URL}}"],
+                                    "path": ["api", "v1", "marital-status", "1"]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Delete",
+                            "request": {
+                                "method": "DELETE",
+                                "header": [],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "",
+                                    "options": {
+                                        "raw": {
+                                            "language": "json"
+                                        }
+                                    }
+                                },
+                                "url": {
+                                    "raw": "{{API_URL}}/api/v1/marital-status/2",
+                                    "host": ["{{API_URL}}"],
+                                    "path": ["api", "v1", "marital-status", "2"]
+                                }
+                            },
+                            "response": []
+                        }
+                    ]
+                },
+                {
+                    "name": "Religions",
+                    "item": [
+                        {
+                            "name": "List",
+                            "request": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{API_URL}}/api/v1/religions",
+                                    "host": ["{{API_URL}}"],
+                                    "path": ["api", "v1", "religions"]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Create",
+                            "request": {
+                                "method": "POST",
+                                "header": [],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"name\": \"Islam\"\n}",
+                                    "options": {
+                                        "raw": {
+                                            "language": "json"
+                                        }
+                                    }
+                                },
+                                "url": {
+                                    "raw": "{{API_URL}}/api/v1/religions",
+                                    "host": ["{{API_URL}}"],
+                                    "path": ["api", "v1", "religions"]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Update",
+                            "request": {
+                                "method": "PUT",
+                                "header": [],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"name\": \"Islam Update\"\n}",
+                                    "options": {
+                                        "raw": {
+                                            "language": "json"
+                                        }
+                                    }
+                                },
+                                "url": {
+                                    "raw": "{{API_URL}}/api/v1/religions/1",
+                                    "host": ["{{API_URL}}"],
+                                    "path": ["api", "v1", "religions", "1"]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Delete",
+                            "request": {
+                                "method": "DELETE",
+                                "header": [],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "",
+                                    "options": {
+                                        "raw": {
+                                            "language": "json"
+                                        }
+                                    }
+                                },
+                                "url": {
+                                    "raw": "{{API_URL}}/api/v1/religions/1",
+                                    "host": ["{{API_URL}}"],
+                                    "path": ["api", "v1", "religions", "1"]
+                                }
+                            },
+                            "response": []
+                        }
+                    ]
+                },
+                {
+                    "name": "District",
+                    "item": [
+                        {
+                            "name": "List",
+                            "request": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{API_URL}}/api/v1/districts",
+                                    "host": ["{{API_URL}}"],
+                                    "path": ["api", "v1", "districts"]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Create",
+                            "request": {
+                                "method": "POST",
+                                "header": [],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"name\": \"Benda\"\n}",
+                                    "options": {
+                                        "raw": {
+                                            "language": "json"
+                                        }
+                                    }
+                                },
+                                "url": {
+                                    "raw": "{{API_URL}}/api/v1/districts",
+                                    "host": ["{{API_URL}}"],
+                                    "path": ["api", "v1", "districts"]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Update",
+                            "request": {
+                                "method": "PUT",
+                                "header": [],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"name\": \"Benda Update\"\n}",
+                                    "options": {
+                                        "raw": {
+                                            "language": "json"
+                                        }
+                                    }
+                                },
+                                "url": {
+                                    "raw": "{{API_URL}}/api/v1/districts/1",
+                                    "host": ["{{API_URL}}"],
+                                    "path": ["api", "v1", "districts", "1"]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Delete",
+                            "request": {
+                                "method": "DELETE",
+                                "header": [],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "",
+                                    "options": {
+                                        "raw": {
+                                            "language": "json"
+                                        }
+                                    }
+                                },
+                                "url": {
+                                    "raw": "{{API_URL}}/api/v1/religions/1",
+                                    "host": ["{{API_URL}}"],
+                                    "path": ["api", "v1", "religions", "1"]
+                                }
+                            },
+                            "response": []
+                        }
+                    ]
+                }
+            ],
+            "auth": {
+                "type": "bearer",
+                "bearer": [
+                    {
+                        "key": "token",
+                        "value": "{{TOKEN}}",
+                        "type": "string"
+                    }
+                ]
+            },
+            "event": [
+                {
+                    "listen": "prerequest",
+                    "script": {
+                        "type": "text/javascript",
+                        "packages": {},
+                        "exec": [""]
+                    }
+                },
+                {
+                    "listen": "test",
+                    "script": {
+                        "type": "text/javascript",
+                        "packages": {},
+                        "exec": [""]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "RBAC",
+            "item": [
+                {
+                    "name": "User",
+                    "item": [
+                        {
+                            "name": "List",
+                            "request": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{API_URL}}/api/v1/users",
+                                    "host": ["{{API_URL}}"],
+                                    "path": ["api", "v1", "users"]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Find",
+                            "request": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{API_URL}}/api/v1/users/1",
+                                    "host": ["{{API_URL}}"],
+                                    "path": ["api", "v1", "users", "1"]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Me",
+                            "request": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{API_URL}}/api/v1/users/me",
+                                    "host": ["{{API_URL}}"],
+                                    "path": ["api", "v1", "users", "me"]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Create",
+                            "request": {
+                                "method": "POST",
+                                "header": [],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"username\": \"aaa\",\n    \"password\": \"asd123\",\n    \"employee_id\": 16\n}",
+                                    "options": {
+                                        "raw": {
+                                            "language": "json"
+                                        }
+                                    }
+                                },
+                                "url": {
+                                    "raw": "{{API_URL}}/api/v1/users",
+                                    "host": ["{{API_URL}}"],
+                                    "path": ["api", "v1", "users"]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Update",
+                            "request": {
+                                "method": "PUT",
+                                "header": [],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"username\": \"admin\",\n    \"password\": \"asd1234\"\n}",
+                                    "options": {
+                                        "raw": {
+                                            "language": "json"
+                                        }
+                                    }
+                                },
+                                "url": {
+                                    "raw": "{{API_URL}}/api/v1/users/1",
+                                    "host": ["{{API_URL}}"],
+                                    "path": ["api", "v1", "users", "1"]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Delete",
+                            "request": {
+                                "method": "DELETE",
+                                "header": [],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"username\": \"aaa\",\n    \"password\": \"asd123\",\n    \"employee_id\": 16\n}",
+                                    "options": {
+                                        "raw": {
+                                            "language": "json"
+                                        }
+                                    }
+                                },
+                                "url": {
+                                    "raw": "{{API_URL}}/api/v1/users/2",
+                                    "host": ["{{API_URL}}"],
+                                    "path": ["api", "v1", "users", "2"]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Assign Roles",
+                            "request": {
+                                "method": "POST",
+                                "header": [],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"user_id\": 1,\n    \"role_ids\": [1]\n}",
+                                    "options": {
+                                        "raw": {
+                                            "language": "json"
+                                        }
+                                    }
+                                },
+                                "url": {
+                                    "raw": "{{API_URL}}/api/v1/users/assign-roles",
+                                    "host": ["{{API_URL}}"],
+                                    "path": [
+                                        "api",
+                                        "v1",
+                                        "users",
+                                        "assign-roles"
+                                    ]
+                                }
+                            },
+                            "response": []
+                        }
+                    ]
+                },
+                {
+                    "name": "Role",
+                    "item": [
+                        {
+                            "name": "List",
+                            "request": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{API_URL}}/api/v1/roles",
+                                    "host": ["{{API_URL}}"],
+                                    "path": ["api", "v1", "roles"]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Create",
+                            "request": {
+                                "method": "POST",
+                                "header": [],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"name\": \"Karyawan\",\n    \"description\": \"-\"\n}",
+                                    "options": {
+                                        "raw": {
+                                            "language": "json"
+                                        }
+                                    }
+                                },
+                                "url": {
+                                    "raw": "{{API_URL}}/api/v1/roles",
+                                    "host": ["{{API_URL}}"],
+                                    "path": ["api", "v1", "roles"]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Update",
+                            "request": {
+                                "method": "PUT",
+                                "header": [],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"name\": \"Super Admin\",\n    \"description\": \"-\"\n}",
+                                    "options": {
+                                        "raw": {
+                                            "language": "json"
+                                        }
+                                    }
+                                },
+                                "url": {
+                                    "raw": "{{API_URL}}/api/v1/roles/1",
+                                    "host": ["{{API_URL}}"],
+                                    "path": ["api", "v1", "roles", "1"]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Delete",
+                            "request": {
+                                "method": "DELETE",
+                                "header": [],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"username\": \"aaa\",\n    \"password\": \"asd123\",\n    \"employee_id\": 16\n}",
+                                    "options": {
+                                        "raw": {
+                                            "language": "json"
+                                        }
+                                    }
+                                },
+                                "url": {
+                                    "raw": "{{API_URL}}/api/v1/roles/2",
+                                    "host": ["{{API_URL}}"],
+                                    "path": ["api", "v1", "roles", "2"]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Assign Menus",
+                            "request": {
+                                "method": "POST",
+                                "header": [],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"role_id\": 1,\n    \"menu_ids\": [1, 2]\n}",
+                                    "options": {
+                                        "raw": {
+                                            "language": "json"
+                                        }
+                                    }
+                                },
+                                "url": {
+                                    "raw": "{{API_URL}}/api/v1/roles/assign-menus",
+                                    "host": ["{{API_URL}}"],
+                                    "path": [
+                                        "api",
+                                        "v1",
+                                        "roles",
+                                        "assign-menus"
+                                    ]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Assign Permissions",
+                            "request": {
+                                "method": "POST",
+                                "header": [],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"role_id\": 1,\n    \"menu_ids\": [1, 2]\n}",
+                                    "options": {
+                                        "raw": {
+                                            "language": "json"
+                                        }
+                                    }
+                                },
+                                "url": {
+                                    "raw": "{{API_URL}}/api/v1/roles/assign-permissions",
+                                    "host": ["{{API_URL}}"],
+                                    "path": [
+                                        "api",
+                                        "v1",
+                                        "roles",
+                                        "assign-permissions"
+                                    ]
+                                }
+                            },
+                            "response": []
+                        }
+                    ]
+                },
+                {
+                    "name": "Menu",
+                    "item": [
+                        {
+                            "name": "List",
+                            "request": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{API_URL}}/api/v1/menus",
+                                    "host": ["{{API_URL}}"],
+                                    "path": ["api", "v1", "menus"]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Create",
+                            "request": {
+                                "method": "POST",
+                                "header": [],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"name\": \"Dashboard\",\n    \"url\": \"/dashboard\",\n    \"icon\": \"Category\",\n    \"ord\": 1,\n    \"parent_id\": null\n}",
+                                    "options": {
+                                        "raw": {
+                                            "language": "json"
+                                        }
+                                    }
+                                },
+                                "url": {
+                                    "raw": "{{API_URL}}/api/v1/menus",
+                                    "host": ["{{API_URL}}"],
+                                    "path": ["api", "v1", "menus"]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Update",
+                            "request": {
+                                "method": "PUT",
+                                "header": [],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"name\": \"Settings\",\n    \"url\": \"#\",\n    \"icon\": \"User2\",\n    \"ord\": 1\n}",
+                                    "options": {
+                                        "raw": {
+                                            "language": "json"
+                                        }
+                                    }
+                                },
+                                "url": {
+                                    "raw": "{{API_URL}}/api/v1/menus/1",
+                                    "host": ["{{API_URL}}"],
+                                    "path": ["api", "v1", "menus", "1"]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Delete",
+                            "request": {
+                                "method": "DELETE",
+                                "header": [],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"username\": \"aaa\",\n    \"password\": \"asd123\",\n    \"employee_id\": 16\n}",
+                                    "options": {
+                                        "raw": {
+                                            "language": "json"
+                                        }
+                                    }
+                                },
+                                "url": {
+                                    "raw": "{{API_URL}}/api/v1/menus/3",
+                                    "host": ["{{API_URL}}"],
+                                    "path": ["api", "v1", "menus", "3"]
+                                }
+                            },
+                            "response": []
+                        }
+                    ]
+                },
+                {
+                    "name": "Permission",
+                    "item": [
+                        {
+                            "name": "List",
+                            "request": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{API_URL}}/api/v1/permissions",
+                                    "host": ["{{API_URL}}"],
+                                    "path": ["api", "v1", "permissions"]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Create",
+                            "request": {
+                                "method": "POST",
+                                "header": [],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"name\": \"Can Create User\",\n    \"menu_id\": 1\n}",
+                                    "options": {
+                                        "raw": {
+                                            "language": "json"
+                                        }
+                                    }
+                                },
+                                "url": {
+                                    "raw": "{{API_URL}}/api/v1/permissions",
+                                    "host": ["{{API_URL}}"],
+                                    "path": ["api", "v1", "permissions"]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Update",
+                            "request": {
+                                "method": "PUT",
+                                "header": [],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"name\": \"Can Create User\",\n    \"menu_id\": 1\n}",
+                                    "options": {
+                                        "raw": {
+                                            "language": "json"
+                                        }
+                                    }
+                                },
+                                "url": {
+                                    "raw": "{{API_URL}}/api/v1/permissions/1",
+                                    "host": ["{{API_URL}}"],
+                                    "path": ["api", "v1", "permissions", "1"]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Delete",
+                            "request": {
+                                "method": "DELETE",
+                                "header": [],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"username\": \"aaa\",\n    \"password\": \"asd123\",\n    \"employee_id\": 16\n}",
+                                    "options": {
+                                        "raw": {
+                                            "language": "json"
+                                        }
+                                    }
+                                },
+                                "url": {
+                                    "raw": "{{API_URL}}/api/v1/permissions/1",
+                                    "host": ["{{API_URL}}"],
+                                    "path": ["api", "v1", "permissions", "1"]
+                                }
+                            },
+                            "response": []
+                        }
+                    ]
+                }
+            ],
+            "auth": {
+                "type": "bearer",
+                "bearer": [
+                    {
+                        "key": "token",
+                        "value": "{{TOKEN}}",
+                        "type": "string"
+                    }
+                ]
+            },
+            "event": [
+                {
+                    "listen": "prerequest",
+                    "script": {
+                        "type": "text/javascript",
+                        "packages": {},
+                        "exec": [""]
+                    }
+                },
+                {
+                    "listen": "test",
+                    "script": {
+                        "type": "text/javascript",
+                        "packages": {},
+                        "exec": [""]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Call Reports",
+            "item": [
+                {
+                    "name": "List",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{API_URL}}/api/v1/call-reports",
+                            "host": ["{{API_URL}}"],
+                            "path": ["api", "v1", "call-reports"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Create",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"year\": 2024,\n    \"month_period\": \"February\",\n    \"detail\": [\n        {\n            \"day\": \"1\",\n            \"disconnect_call\": 10,\n            \"prank_call\": 5,\n            \"education_call\": 8,\n            \"abandoned\": 0\n        },\n        {\n            \"day\": \"2\",\n            \"disconnect_call\": 10,\n            \"prank_call\": 5,\n            \"education_call\": 8,\n            \"abandoned\": 0\n        }\n    ]\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{API_URL}}/api/v1/call-reports",
+                            "host": ["{{API_URL}}"],
+                            "path": ["api", "v1", "call-reports"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update",
+                    "request": {
+                        "method": "PUT",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"year\": 2024,\n    \"month_period\": \"February\",\n    \"detail\": [\n        {\n            \"day\": \"1\",\n            \"disconnect_call\": 10,\n            \"prank_call\": 5,\n            \"education_call\": 8,\n            \"abandoned\": 0\n        },\n        {\n            \"day\": \"2\",\n            \"disconnect_call\": 10,\n            \"prank_call\": 5,\n            \"education_call\": 8,\n            \"abandoned\": 0\n        }\n    ]\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{API_URL}}/api/v1/call-reports/4",
+                            "host": ["{{API_URL}}"],
+                            "path": ["api", "v1", "call-reports", "4"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Delete",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"year\": 2024,\n    \"month_period\": \"February\",\n    \"detail\": [\n        {\n            \"day\": \"1\",\n            \"disconnect_call\": 10,\n            \"prank_call\": 5,\n            \"education_call\": 8,\n            \"abandoned\": 0\n        },\n        {\n            \"day\": \"2\",\n            \"disconnect_call\": 10,\n            \"prank_call\": 5,\n            \"education_call\": 8,\n            \"abandoned\": 0\n        }\n    ]\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{API_URL}}/api/v1/call-reports/5",
+                            "host": ["{{API_URL}}"],
+                            "path": ["api", "v1", "call-reports", "5"]
+                        }
+                    },
+                    "response": []
+                }
+            ],
+            "auth": {
+                "type": "bearer",
+                "bearer": [
+                    {
+                        "key": "token",
+                        "value": "{{TOKEN}}",
+                        "type": "string"
+                    }
+                ]
+            },
+            "event": [
+                {
+                    "listen": "prerequest",
+                    "script": {
+                        "type": "text/javascript",
+                        "packages": {},
+                        "exec": [""]
+                    }
+                },
+                {
+                    "listen": "test",
+                    "script": {
+                        "type": "text/javascript",
+                        "packages": {},
+                        "exec": [""]
+                    }
+                }
+            ]
+        }
+    ],
+    "event": [
+        {
+            "listen": "prerequest",
+            "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "exec": [""]
+            }
+        },
+        {
+            "listen": "test",
+            "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "exec": [""]
+            }
+        }
+    ],
+    "variable": [
+        {
+            "key": "API_URL",
+            "value": "http://127.0.0.1:8000",
+            "type": "string"
+        },
+        {
+            "key": "TOKEN",
+            "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL3YxL2F1dGgvbG9naW4iLCJpYXQiOjE3MjUwMzA5NTgsImV4cCI6MTcyNTAzNDU1OCwibmJmIjoxNzI1MDMwOTU4LCJqdGkiOiJMZE1VWEFaUlhqNXBZcjV2Iiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.8PdLaxzgCYhAUYOd89aXweGMMHF3qpqQX22Wm6gGqMM",
+            "type": "string"
+        }
+    ]
+}
